@@ -1,4 +1,4 @@
-﻿// Fill out your copyright notice in the Description page of Project Settings.
+﻿// Joao Ricardo Copyright.
 
 #include "Characters/PlayableCharacters/GCC_PlayerController.h"
 #include "EnhancedInputComponent.h"
