@@ -29,6 +29,7 @@ void AGCC_PlayerController::SetupInputComponent()
 		EnhancedInputComponent->BindAction(LookAction, ETriggerEvent::Triggered, this, &AGCC_PlayerController::Look);
 		EnhancedInputComponent->BindAction(JumpAction, ETriggerEvent::Triggered, this, &ThisClass::Jump);
 		EnhancedInputComponent->BindAction(SprintAction, ETriggerEvent::Triggered, this, &AGCC_PlayerController::Sprint);
+		EnhancedInputComponent->BindAction(PrimaryAction, ETriggerEvent::Triggered, this, &AGCC_PlayerController::Primary);
 	}
 }
 
@@ -59,6 +60,13 @@ void AGCC_PlayerController::Jump()
 }
 
 void AGCC_PlayerController::Sprint()
+{
+
+
+
+}
+
+void AGCC_PlayerController::Primary()
 {
 	
 }
