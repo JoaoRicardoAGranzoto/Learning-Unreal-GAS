@@ -32,12 +32,22 @@ protected:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Input")
 	TObjectPtr<class UInputAction> SprintAction;
 	
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="Camera")
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="Input")
 	TObjectPtr<class UInputAction> PrimaryAction;
+	
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Input")
+	TObjectPtr<class UInputAction> SecondaryAction;
+	
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Input")
+	TObjectPtr<class UInputAction> TertiaryAction;
 	
 	void Move(const struct FInputActionValue& Value);
 	void Look(const struct FInputActionValue& Value);
 	void Jump();
 	void Sprint();
 	void Primary();
+	void Secondary();
+	void Tertiary();
+	
+	void ActivateAbility(const struct FGameplayTag& AbilityTag) const;
 };

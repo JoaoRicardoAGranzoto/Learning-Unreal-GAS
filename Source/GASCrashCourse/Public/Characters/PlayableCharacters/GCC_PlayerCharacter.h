@@ -28,5 +28,4 @@ protected:
 	
 	UPROPERTY(VisibleDefaultsOnly, BlueprintReadOnly, Category="Camera")
 	TObjectPtr<class UCameraComponent> FollowCamera;
-	
 };

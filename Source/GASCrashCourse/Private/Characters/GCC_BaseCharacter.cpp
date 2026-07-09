@@ -30,7 +30,7 @@ void AGCC_BaseCharacter::GiveStartupAbilities()
 
 	for (const auto& Ability : StartupAbilites)
 	{
-		FGameplayAbilitySpec AbilitySpec=FGameplayAbilitySpec(Ability);
+		FGameplayAbilitySpec AbilitySpec=FGameplayAbilitySpec(Ability, 1);
 		GetAbilitySystemComponent()->GiveAbility(AbilitySpec);
 	}
 }

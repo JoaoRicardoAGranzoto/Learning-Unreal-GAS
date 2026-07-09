@@ -1,8 +1,13 @@
 ﻿// Joao Ricardo Copyright.
 
 #include "Characters/PlayableCharacters/GCC_PlayerController.h"
+#include "AbilitySystemBlueprintLibrary.h"
+#include "AbilitySystemComponent.h"
+#include "AbilitySystemGlobals.h"
 #include "EnhancedInputComponent.h"
 #include "EnhancedInputSubsystems.h"
+#include "GCCTags.h"
+#include "Engine/Engine.h"
 #include "Engine/LocalPlayer.h"
 #include "GameFramework/Character.h"
 #include "GameFramework/Pawn.h"
@@ -11,15 +16,15 @@ void AGCC_PlayerController::SetupInputComponent()
 {
 	Super::SetupInputComponent();
 
+	
+	
+	
+	
 	if (UEnhancedInputLocalPlayerSubsystem* Subsystem = ULocalPlayer::GetSubsystem<UEnhancedInputLocalPlayerSubsystem>(GetLocalPlayer()))
 	{
 		for (auto Mapping : DefaultMapping)
 		{
 			Subsystem->AddMappingContext(Mapping, 0);
-		
-		
-		
-		
 		}
 	}
 
@@ -30,6 +35,8 @@ void AGCC_PlayerController::SetupInputComponent()
 		EnhancedInputComponent->BindAction(JumpAction, ETriggerEvent::Triggered, this, &ThisClass::Jump);
 		EnhancedInputComponent->BindAction(SprintAction, ETriggerEvent::Triggered, this, &AGCC_PlayerController::Sprint);
 		EnhancedInputComponent->BindAction(PrimaryAction, ETriggerEvent::Triggered, this, &AGCC_PlayerController::Primary);
+		EnhancedInputComponent->BindAction(SecondaryAction, ETriggerEvent::Triggered, this, &ThisClass::Secondary);
+		EnhancedInputComponent->BindAction(TertiaryAction, ETriggerEvent::Triggered, this, &AGCC_PlayerController::Tertiary);
 	}
 }
 
@@ -54,6 +61,9 @@ void AGCC_PlayerController::Look(const struct FInputActionValue& Value)
 	AddPitchInput(_2DValue.Y);
 }
 
+
+
+
 void AGCC_PlayerController::Jump()
 {
 	GetCharacter()->Jump();
@@ -62,11 +72,29 @@ void AGCC_PlayerController::Jump()
 void AGCC_PlayerController::Sprint()
 {
 
-
-
 }
 
 void AGCC_PlayerController::Primary()
 {
+	ActivateAbility(GCCTags::GCCAbilities::Primary);
+}
+
+void AGCC_PlayerController::Secondary()
+{
+	ActivateAbility(GCCTags::GCCAbilities::Secondary);
+	UE_LOG(LogTemp, Warning, TEXT("Teste 2"))
+}
+
+void AGCC_PlayerController::Tertiary()
+{
+	ActivateAbility(GCCTags::GCCAbilities::Tertiary);
+}
+
+void AGCC_PlayerController::ActivateAbility(const FGameplayTag& AbilityTag) const
+{
+	UAbilitySystemComponent* ASC = UAbilitySystemBlueprintLibrary::GetAbilitySystemComponent(GetPawn());
 	
+	if (!IsValid(ASC)) return;
+
+	ASC->TryActivateAbilitiesByTag(AbilityTag.GetSingleTagContainer());
 }
